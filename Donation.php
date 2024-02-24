@@ -2,11 +2,11 @@
 
 class Donation
 {
-    public $id;
-    public $donorName;
-    public $amount;
-    public $charityId;
-    public $dateTime;
+    public int $id;
+    public string $donorName;
+    public float $amount;
+    public int $charityId;
+    public DateTime $dateTime;
 
     function __construct($id, $donorName, $amount, $charityI, $dateTime) {
         $this->id = $id;

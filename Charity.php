@@ -2,9 +2,9 @@
 
 class Charity
 {
-    public $id;
-    public $name;
-    public $representativeEmail;
+    public int $id;
+    public string $name;
+    public string $representativeEmail;
 
     function __construct($id, $name, $representativeEmail) {
         $this->id = $id;
