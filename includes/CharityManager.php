@@ -98,6 +98,10 @@ class CharityManager
             echo "Incorrect email format\n";
             return false;
         }
+        else if (strlen($email)>30){
+            echo "Email is too long\n";
+            return false;
+        }
         else{
             return true;
         }
@@ -106,6 +110,10 @@ class CharityManager
     private function validName($name):bool{
         if (strlen($name)>30){
             echo "Charity name is too long\n";
+            return false;
+        }
+        else if(strlen($name)==0){
+            echo "Charity name is blank\n";
             return false;
         }
         else {

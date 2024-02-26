@@ -34,6 +34,10 @@ class DonationManager
             echo "Donor name is too long\n";
             return false;
         }
+        else if (strlen($name)==0){
+            echo "Donor name is blank\n";
+            return false;
+        }
         else {
             return true;
         }
