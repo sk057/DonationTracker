@@ -24,29 +24,12 @@ class CharityManager
     function viewCharity(int $id): void
     {
         if (array_key_exists($id,$this->charityArray)){
-            var_dump($this->charityArray[$id]);
+            $this->charityArray[$id]->toString();
         }
         else{
             echo "ID does not exist, enter new ID\n";
             $id = (int)readline();
             $this->viewCharity($id);
-        }
-    }
-
-    function viewCharityByName(string $name):int
-    {
-        if ($this->checkNameExists($name)){
-            foreach ($this->charityArray as $charity){
-                if ($charity->name == $name){
-                    var_dump($charity);
-                    break;
-                }
-            }
-            return 0;
-        }
-        else{
-            echo "Charity does not exist";
-            return -1;
         }
     }
 

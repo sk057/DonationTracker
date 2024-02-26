@@ -41,4 +41,8 @@ class Charity
         $this->name = $name;
         $this->representativeEmail = $representativeEmail;
     }
+
+    function toString():void{
+        echo "$this->id, $this->name, $this->representativeEmail\n";
+    }
 }

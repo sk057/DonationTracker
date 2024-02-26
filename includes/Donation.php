@@ -65,4 +65,9 @@ class Donation
         $this->charityId = $charityId;
         $this->dateTime = $dateTime;
     }
+
+    function toString():void
+    {
+        echo "$this->id, $this->donorName, $this->amount, $this->charityId, $this->dateTime\n";
+    }
 }
