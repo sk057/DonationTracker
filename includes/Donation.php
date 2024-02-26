@@ -58,11 +58,11 @@ class Donation
         $this->dateTime = $dateTime;
     }
 
-    function __construct($id, $donorName, $amount, $charityI, $dateTime) {
+    function __construct($id, $donorName, $amount, $charityId, $dateTime) {
         $this->id = $id;
         $this->donorName = $donorName;
         $this->amount = $amount;
-        $this->charityId = $charityI;
+        $this->charityId = $charityId;
         $this->dateTime = $dateTime;
     }
 }
