@@ -69,6 +69,17 @@ class CharityManager
         }
     }
 
+    function appendArray(array $moreCharities):void
+    {
+        foreach($moreCharities as $charity){
+            if (!$this->checkNameExists($charity->getName()) && $this->validName($charity->getName())
+                &&  $this->validEmail($charity->getRepresentativeEmail())){
+                $charity->setId(count($this->charityArray));
+                $this->charityArray[] = $charity;
+            }
+        }
+    }
+
     //charity name should be unique
     private function checkNameExists($name):bool
     {
