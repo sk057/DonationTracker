@@ -49,25 +49,22 @@ class CharityManager
         }
     }
 
-    function addCharity($name, $representativeEmail): int
+    function addCharity($name, $email): void
     {
-        if ($this->checkNameExists($name) && $this->validName($name)){
-
-            return -1;
-        }
-        else{
+        if (!$this->checkNameExists($name) && $this->validName($name) &&  $this->validEmail($email)){
             //generating unique IDs
             $id = count($this->charityArray);
-            $charity = new Charity($id, $name, $representativeEmail);
+            $charity = new Charity($id, $name, $email);
             $this->charityArray[] = $charity;
-            return 0;
         }
     }
 
     function editCharity($id,$name,$email):void
     {
-        $this->charityArray[$id]->setName($name);
-        $this->charityArray[$id]->setRepresentativeEmail($email);
+        if (!$this->checkNameExists($name) && $this->validName($name) &&  $this->validEmail($email)){
+            $this->charityArray[$id]->setName($name);
+            $this->charityArray[$id]->setRepresentativeEmail($email);
+        }
     }
 
     function deleteCharity($id): void
@@ -80,7 +77,7 @@ class CharityManager
     {
         foreach ($this->charityArray as $charity){
             if ($charity->getName() == $name){
-                echo "Charity name already exists";
+                echo "Charity name already exists\n";
                 return true;
             }
         }
@@ -89,12 +86,18 @@ class CharityManager
 
     function validEmail($email):bool
     {
-
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            echo "Incorrect email format\n";
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     function validName($name):bool{
-        if (strlen($name)>50){
-            echo "Charity name is too long";
+        if (strlen($name)>5){
+            echo "Charity name is too long\n";
             return false;
         }
         else {
