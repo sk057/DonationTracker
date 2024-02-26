@@ -9,7 +9,6 @@ $charityManager = new CharityManager();
 $donationManager = new DonationManager();
 $csvManager = new CSVManager();
 echo "<pre>";
-//integrate csv manager here
 while(true){
     echo "1-view, 2-add, 3-edit, 4-delete, 5-new donation, 6-import file, 7-quit\n";
     $choice = (int)readline();
@@ -19,9 +18,16 @@ while(true){
         switch ($choice){
             case 1: {
                 if (count($charityManager->getCharityArray())>0){
-                    echo "Enter charity ID\n"; //or name
-                    $id = (int)readline();
-                    $charityManager->viewCharity($id);
+                    echo "Enter charity ID\n";
+                    $idString = readline();
+                    if (is_numeric($idString)){
+                        $id=(int)$idString;
+                        $charityManager->viewCharity($id);
+                    }
+                    else{
+                        echo "Enter only numbers\n";
+                        break;
+                    }
                 }
                 else{
                     echo "Charity list is empty\n";
@@ -37,7 +43,14 @@ while(true){
             }
             case 3:{
                 echo "Enter ID\n";
-                $id = (int)readline();
+                $idString = readline();
+                if (is_numeric($idString)){
+                    $id=(int)$idString;
+                }
+                else{
+                    echo "Enter only numbers\n";
+                    break;
+                }
                 if (array_key_exists($id,$charityManager->getCharityArray())){
                     echo "Enter new name and email\n";
                     $name = readline();
@@ -51,7 +64,14 @@ while(true){
             }
             case 4:{
                 echo "Enter ID\n";
-                $id = (int)readline();
+                $idString = readline();
+                if (is_numeric($idString)){
+                    $id=(int)$idString;
+                }
+                else{
+                    echo "Enter only numbers\n";
+                    break;
+                }
                 if (array_key_exists($id,$charityManager->getCharityArray())){
                     $newDonations=$charityManager->deleteCharity($id,$donationManager->getDonationArray());
                     $donationManager->setDonationArray($newDonations);
@@ -64,8 +84,16 @@ while(true){
             case 5:{
                 echo "Enter donor, amount, charity ID and datetime\n";
                 $donor = readline();
-                $amount = (float)readline();
-                $charityId = (int)readline();
+                $amountString = readline();
+                $idString = readline();
+                if (is_numeric($idString) && is_numeric($amountString)){
+                    $charityId=(int)$idString;
+                    $amount=(float)$amountString;
+                }
+                else{
+                    echo "Enter only numbers for amount and ID\n";
+                    break;
+                }
                 $dateString = readline();
                 try {
                     $date = new DateTime($dateString);
@@ -93,8 +121,6 @@ while(true){
             }
         }
     }
-
-//var_dump($donationManager->getDonationArray());
 }
 echo "</pre>";
 die();

@@ -2,7 +2,7 @@
 
 class Charity
 {
-    private int $id;//add getters setters and validation
+    private int $id;
     private string $name;
     private string $representativeEmail;
 

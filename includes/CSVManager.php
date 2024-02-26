@@ -2,10 +2,10 @@
 include_once 'Charity.php';
 class CSVManager
 {
-    function __construct() {
+    public function __construct() {
     }
 
-    function readFile(string $filePath):array
+    public function readFile(string $filePath):array
     {
         $charityArray = [];
         $file_parts = pathinfo($filePath);

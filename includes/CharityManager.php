@@ -17,11 +17,11 @@ class CharityManager
         $this->charityArray = $charityArray;
     }
 
-    function __construct() {
+    public function __construct(){
         $this->charityArray = [];
     }
 
-    function viewCharity(int $id): void
+    public function viewCharity(int $id): void
     {
         if (array_key_exists($id,$this->charityArray)){
             $this->charityArray[$id]->toString();
@@ -33,7 +33,7 @@ class CharityManager
         }
     }
 
-    function addCharity($name, $email): void
+    public function addCharity(string $name, string $email): void
     {
         if (!$this->checkNameExists($name) && $this->validName($name) &&  $this->validEmail($email)){
             //generating unique IDs
@@ -43,15 +43,20 @@ class CharityManager
         }
     }
 
-    function editCharity($id,$name,$email):void
+    public function editCharity(int $id, string $name, string $email):void
     {
-        if (!$this->checkNameExists($name) && $this->validName($name) &&  $this->validEmail($email)){
-            $this->charityArray[$id]->setName($name);
-            $this->charityArray[$id]->setRepresentativeEmail($email);
+        if (array_key_exists($id,$this->charityArray)){
+            if (!$this->checkNameExists($name) && $this->validName($name) &&  $this->validEmail($email)){
+                $this->charityArray[$id]->setName($name);
+                $this->charityArray[$id]->setRepresentativeEmail($email);
+            }
+        }
+        else{
+            echo "ID does not exist";
         }
     }
 
-    function deleteCharity($id,$donationArray): array
+    public function deleteCharity(int $id, array $donationArray): array
     {
         if (array_key_exists($id,$this->charityArray)){
             array_splice($this->charityArray, $id, 1);
@@ -69,7 +74,7 @@ class CharityManager
         }
     }
 
-    function appendArray(array $moreCharities):void
+    public function appendArray(array $moreCharities):void
     {
         foreach($moreCharities as $charity){
             if (!$this->checkNameExists($charity->getName()) && $this->validName($charity->getName())
@@ -81,7 +86,7 @@ class CharityManager
     }
 
     //charity name should be unique
-    private function checkNameExists($name):bool
+    private function checkNameExists(string $name):bool
     {
         foreach ($this->charityArray as $charity){
             if ($charity->getName() == $name){
@@ -92,7 +97,7 @@ class CharityManager
         return false;
     }
 
-    private function validEmail($email):bool
+    private function validEmail(string $email):bool
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             echo "Incorrect email format\n";
@@ -107,7 +112,7 @@ class CharityManager
         }
     }
 
-    private function validName($name):bool{
+    private function validName(string $name):bool{
         if (strlen($name)>30){
             echo "Charity name is too long\n";
             return false;

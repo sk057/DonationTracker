@@ -15,11 +15,11 @@ class DonationManager
         $this->donationArray = $donationArray;
     }
 
-    function __construct() {
+    public function __construct() {
         $this->donationArray = [];
     }
 
-    function addDonation($donorName, $amount, $charityId, $dateTime):void
+    public function addDonation(string $donorName, float $amount, int $charityId, DateTime $dateTime):void
     {
         if  ($this->validName($donorName) && $this->validAmount($amount) && $this->validDate($dateTime)){
             $id = count($this->donationArray);
@@ -28,7 +28,7 @@ class DonationManager
         }
     }
 
-    private function validName($name):bool
+    private function validName(string $name):bool
     {
         if (strlen($name)>30){
             echo "Donor name is too long\n";
@@ -43,7 +43,7 @@ class DonationManager
         }
     }
 
-    private function validAmount($amount):bool{
+    private function validAmount(float $amount):bool{
         if ($amount<=0){
             echo "incorrect amount entered\n";
             return false;
@@ -53,7 +53,7 @@ class DonationManager
         }
     }
 
-    private function validDate($date):bool
+    private function validDate(DateTime $date):bool
     {
         $currentTime = new DateTime();
         $pastTime = new DateTime("2000-01-01");
