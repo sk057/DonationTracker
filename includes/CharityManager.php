@@ -67,9 +67,22 @@ class CharityManager
         }
     }
 
-    function deleteCharity($id): void
+    function deleteCharity($id,$donationArray): array
     {
-        array_splice($this->charityArray, $id, 1);
+        if (array_key_exists($id,$this->charityArray)){
+            array_splice($this->charityArray, $id, 1);
+            //updating the donation->charity IDs after deletion
+            for ($x = 0; $x < count($donationArray); $x++){
+                if($donationArray[$x]->getCharityId()>$id) {
+                    $donationArray[$x]->setCharityId($donationArray[$x]->getCharityId() - 1);
+                }
+            }
+            return $donationArray;
+        }
+        else{
+            echo "ID does not exist";
+            return $donationArray;
+        }
     }
 
     //charity name should be unique
