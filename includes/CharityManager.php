@@ -1,6 +1,7 @@
 <?php
 
-include 'Charity.php';
+include_once 'Charity.php';
+include_once 'Donation.php';
 
 class CharityManager
 {
@@ -86,7 +87,7 @@ class CharityManager
     }
 
     //charity name should be unique
-    function checkNameExists($name):bool
+    private function checkNameExists($name):bool
     {
         foreach ($this->charityArray as $charity){
             if ($charity->getName() == $name){
@@ -97,7 +98,7 @@ class CharityManager
         return false;
     }
 
-    function validEmail($email):bool
+    private function validEmail($email):bool
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             echo "Incorrect email format\n";
@@ -108,7 +109,7 @@ class CharityManager
         }
     }
 
-    function validName($name):bool{
+    private function validName($name):bool{
         if (strlen($name)>30){
             echo "Charity name is too long\n";
             return false;

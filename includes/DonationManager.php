@@ -28,7 +28,7 @@ class DonationManager
         }
     }
 
-    function validName($name):bool
+    private function validName($name):bool
     {
         if (strlen($name)>30){
             echo "Donor name is too long\n";
@@ -39,7 +39,7 @@ class DonationManager
         }
     }
 
-    function validAmount($amount):bool{
+    private function validAmount($amount):bool{
         if ($amount<=0){
             echo "incorrect amount entered\n";
             return false;
@@ -49,7 +49,7 @@ class DonationManager
         }
     }
 
-    function validDate($date):bool
+    private function validDate($date):bool
     {
         $currentTime = new DateTime();
         $pastTime = new DateTime("2000-01-01");
