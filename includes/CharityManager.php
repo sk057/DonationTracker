@@ -69,7 +69,7 @@ class CharityManager
 
     function deleteCharity($id): void
     {
-        unset($this->charityArray[$id]); //how does this interact with the rest of the ids?
+        array_splice($this->charityArray, $id, 1);
     }
 
     //charity name should be unique
@@ -96,7 +96,7 @@ class CharityManager
     }
 
     function validName($name):bool{
-        if (strlen($name)>5){
+        if (strlen($name)>30){
             echo "Charity name is too long\n";
             return false;
         }
